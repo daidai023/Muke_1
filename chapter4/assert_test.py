@@ -14,10 +14,7 @@ import unittest
 class A(unittest.TestCase):
 
     def test_a(self):
-        _len = self.test_a.__name__.__len__()
-        # print(_len)
-        assert (_len == 4)
+        assert (_len :=self.test_a.__name__.__len__()) == 4
 
     def test_b(self):
-        _len = self.test_b.__name__.__len__()
-        self.assertEqual(_len, 4)
+        self.assertEqual((_len := self.test_b.__name__.__len__()), 4)
