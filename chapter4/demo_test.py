@@ -1,3 +1,4 @@
+# coding = utf-8
 import unittest
 
 from chapter3.po_demo import Search
@@ -50,7 +51,7 @@ import unittest
 data = (
     {"user": 'admin', 'pwd': 'Aa123456', 'ass': 'admin', 'txt': 'test_login_admin is ok!'},
     {"user": 'test1', 'pwd': 'Aa123456', 'ass': 'test1', 'txt': 'test_login_test1 is ok!'},
-    {"user": 'test2', 'pwd': 'Aa123456', 'ass': 'test8', 'txt': 'test_login_test2 is ok!'}
+    {"user": 'test2', 'pwd': 'Aa123456', 'ass': 'test7', 'txt': 'test_login_test2 is ok!'}
 )
 
 
@@ -62,8 +63,13 @@ class A(unittest.TestCase, Search):
             with self.subTest(d):
                 self.get()
                 self.login(d['user'], d['pwd'])
-                assert self.element(self.user_name).text == d['ass'], \
+                # assert self.element(self.user_name).text == d['ass'], \
+                #     self.driver.save_screenshot(f"./{d['ass']}.png")
+                try:
+                    self.assertEqual(self.element(self.user_name).text, d['ass'])
+                except AssertionError:
                     self.driver.save_screenshot(f"./{d['ass']}.png")
+                    raise AssertionError
                 print(d['txt'])
                 self.logout()
 
