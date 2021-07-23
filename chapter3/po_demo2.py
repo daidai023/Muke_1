@@ -87,9 +87,9 @@ class TestMain:
         page.driver.quit()
 
 
-# 执行测试
-obj = TestMain()
-obj.test_login()
-obj.test_search()
+# # 执行测试
+# obj = TestMain()
+# obj.test_login()
+# obj.test_search()
 
 
