@@ -16,6 +16,23 @@ class Page:
 
     driver = None
 
+    @classmethod
+    def cls_element(cls, loc: tuple):
+        """
+        定义element类方法
+        :return:
+        """
+        return cls.driver.find_element(*loc)
+
+    @classmethod
+    def cls_elements(cls, loc: tuple):
+        """
+        定义elements类方法
+        :return:
+        """
+        return cls.driver.find_elements(*loc)
+
+    # 类的实例方法
     def element(self, loc: tuple):
         """
         定位元素的方法
@@ -34,7 +51,7 @@ class Page:
 
 class CommonLoginPage(Page):
     url = r'http://zentao:XMR0mWcyXKJ@127.0.0.1/zentao/user-login-L3plbnRhby9teS5odG1s.html'
-    driver = CHROME().browser           # 直接调用test定义的浏览器类型
+    driver = CHROME().browser  # 直接调用test定义的浏览器类型
     username = ('id', 'account')
     password = ('name', 'password')
     loginBtn = ('id', 'submit')
@@ -46,7 +63,27 @@ class CommonLoginPage(Page):
         """
         self.driver.get(self.url)
 
-    def login(self, username: str='admin', password: str='Aa123456'):
+    @classmethod
+    def cls_get(cls):
+        """
+        类方法，打开首页
+        :return:
+        """
+        cls.driver.get(cls.url)
+
+    @classmethod
+    def cls_login(cls, username: str = 'admin', password: str = 'Aa123456'):
+        """
+        类方法，进行登录操作
+        :param username:
+        :param password:
+        :return:
+        """
+        cls.cls_element(cls.username).send_keys(username)
+        cls.cls_element(cls.password).send_keys(password)
+        cls.cls_element(cls.loginBtn).click()
+
+    def login(self, username: str = 'admin', password: str = 'Aa123456'):
         self.element(self.username).send_keys(username)
         self.element(self.password).send_keys(password)
         self.element(self.loginBtn).click()
@@ -63,7 +100,7 @@ class Search(CommonLoginPage):
     # 退出的元素
     log_out = ('xpath', '//*[@id="userNav"]/li/ul/li[13]/a')
 
-    def search_bug(self, bug_id: str='1'):
+    def search_bug(self, bug_id: str = '1'):
         self.element(self.searchInput).send_keys(bug_id)
         self.element(self.searchGo).click()
 
@@ -76,6 +113,7 @@ class TestSearch(Search):
     """
     测试登录和验证bug功能
     """
+
     def test_login(self):
         self.get()
         self.login()
@@ -89,12 +127,6 @@ class TestSearch(Search):
         print('tes_search is ok!')
         self.driver.quit()
 
-
 # obj = TestSearch()
 # obj.test_login()
 # obj.test_search()
-
-
-
-
-
