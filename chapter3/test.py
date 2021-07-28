@@ -13,6 +13,7 @@
 from selenium.webdriver import *
 from typing import Type, Union
 import time
+from setting import *
 
 
 class BrowserTypeError(Exception):
@@ -26,11 +27,11 @@ class BrowserTypeError(Exception):
 
 class BROWSER:
     # driver地址
-    CHROME_DRIVER_PATH = '../driver/chromedriver.exe'
-    EDGE_DRIVER_PATH = '../driver/edge_driver.exe'
-    FIREFOX_DRIVER_PATH = '../driver/gecko_driver.exe'
-    IE_DRIVER_PATH = '../driver/IEDriverServer.exe'
-    OPERA_DRIVER_PATH = '../driver/opera_driver.exe'
+    CHROME_DRIVER_PATH = CHROME_DRIVER_PATH
+    EDGE_DRIVER_PATH = EDGE_DRIVER_PATH
+    FIREFOX_DRIVER_PATH = FIREFOX_DRIVER_PATH
+    IE_DRIVER_PATH = IE_DRIVER_PATH
+    OPERA_DRIVER_PATH = OPERA_DRIVER_PATH
 
     WINDOWS_SIZE = (1024, 768)  # 定义浏览器的尺寸
 

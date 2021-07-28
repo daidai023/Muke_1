@@ -9,6 +9,7 @@
 """
 from chapter3.test import *
 from selenium.webdriver.common.keys import Keys
+from setting import *
 
 
 class Page:
@@ -50,7 +51,7 @@ class Page:
 
 
 class CommonLoginPage(Page):
-    url = r'http://zentao:XMR0mWcyXKJ@127.0.0.1/zentao/user-login-L3plbnRhby9teS5odG1s.html'
+    url = PROJECT_ZENTAO_URL
     driver = CHROME().browser  # 直接调用test定义的浏览器类型
     username = ('id', 'account')
     password = ('name', 'password')
